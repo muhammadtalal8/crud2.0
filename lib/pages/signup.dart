@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:crud2/pages/login.dart';
 import 'package:flutter/material.dart';
 
 class Signup extends StatefulWidget {
@@ -138,10 +139,11 @@ class _SignupState extends State<Signup> {
                               Navigator.pushReplacement(
                                   context,
                                   PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            Login(),
-                                  ))
+                                      pageBuilder:
+                                          (context, animation1, animation2) =>
+                                              const Login(),
+                                      transitionDuration:
+                                          const Duration(seconds: 0))),
                             },
                         child: const Text('Login')),
                   ],
