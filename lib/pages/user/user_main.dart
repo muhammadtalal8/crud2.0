@@ -1,6 +1,9 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:crud2/pages/forget_password.dart';
+import 'package:crud2/pages/user/change_password.dart';
+import 'package:crud2/pages/user/dashboard.dart';
+import 'package:crud2/pages/user/profile.dart';
 import 'package:flutter/material.dart';
 
 class UserMain extends StatefulWidget {
@@ -13,9 +16,9 @@ class UserMain extends StatefulWidget {
 class _UserMainState extends State<UserMain> {
   int _selectedIndex = 0;
   static List<Widget> widgetOption = <Widget>[
-    Dashboard(),
-    Profile(),
-    ChangePassword(),
+    const Dashboard(),
+    const Profile(),
+    const ChangePassword(),
   ];
   void _onItemTapped(int index) {
     setState(() {

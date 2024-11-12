@@ -11,23 +11,23 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(
         children: [
-          Text(
+          const Text(
             "User ID: kll2962",
             style: TextStyle(fontSize: 18.0),
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 "Email:Khan@gmail.com",
                 style: TextStyle(fontSize: 18.0),
               ),
-              TextButton(onPressed: () => {}, child: Text("Veify Email"))
+              TextButton(onPressed: () => {}, child: const Text("Veify Email"))
             ],
           ),
-          Text(
+          const Text(
             "Created:11/11/2024",
             style: TextStyle(fontSize: 18.0),
           )

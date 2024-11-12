@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:crud2/pages/signup.dart';
+import 'package:crud2/pages/user/user_main.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -18,6 +19,11 @@ class _LoginState extends State<Login> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  userLogin() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const UserMain()));
+  }
 
   @override
   void dispose() {
@@ -91,6 +97,7 @@ class _LoginState extends State<Login> {
                                 email = emailController.text;
                                 password = passwordController.text;
                               });
+                              userLogin();
                             }
                           },
                           child: const Text(

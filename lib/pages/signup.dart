@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:crud2/pages/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Signup extends StatefulWidget {
@@ -27,6 +28,17 @@ class _SignupState extends State<Signup> {
     passwordController.dispose();
     confirmpasswordController.dispose();
     super.dispose();
+  }
+
+  registration() async {
+    if (password == confirmpassword) {
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+      } catch (e) {}
+    } else {
+      print("Password and Confirm Password doesn't match");
+    }
   }
 
   @override
@@ -115,6 +127,7 @@ class _SignupState extends State<Signup> {
                                 confirmpassword =
                                     confirmpasswordController.text;
                               });
+                              registration();
                             }
                           },
                           child: const Text(
