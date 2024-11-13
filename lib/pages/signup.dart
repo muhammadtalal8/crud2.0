@@ -1,6 +1,7 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, unnecessary_const, use_build_context_synchronously, avoid_print, empty_catches
 
 import 'package:crud2/pages/login.dart';
+import 'package:crud2/pages/user/user_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -33,9 +34,38 @@ class _SignupState extends State<Signup> {
   registration() async {
     if (password == confirmpassword) {
       try {
-        await FirebaseAuth.instance
+        UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
-      } catch (e) {}
+        print(userCredential);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: const Text(
+              "Registration successfully, Logged In..",
+              style: TextStyle(fontSize: 20.0),
+            )));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const UserMain()));
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print("Password Provided is weak");
+
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content: const Text(
+                "Password Provided is weak",
+                style: TextStyle(fontSize: 20.0),
+              )));
+        } else if (e.code == 'email-already-in-use') {
+          print("Account Already exists");
+
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content: const Text(
+                "Account Already exists",
+                style: TextStyle(fontSize: 20.0),
+              )));
+        }
+      }
     } else {
       print("Password and Confirm Password doesn't match");
     }
