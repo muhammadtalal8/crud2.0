@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, unnecessary_const, use_build_context_synchronously, avoid_print, empty_catches
 
 import 'package:crud2/pages/login.dart';
-import 'package:crud2/pages/user/user_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -40,34 +39,41 @@ class _SignupState extends State<Signup> {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.redAccent,
             content: const Text(
-              "Registration successfully, Logged In..",
+              "Registration successfully, Log in",
               style: TextStyle(fontSize: 20.0),
             )));
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const UserMain()));
+            context, MaterialPageRoute(builder: (context) => const Login()));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           print("Password Provided is weak");
 
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              backgroundColor: Colors.redAccent,
-              content: const Text(
-                "Password Provided is weak",
-                style: TextStyle(fontSize: 20.0),
-              )));
+            backgroundColor: Colors.orangeAccent,
+            content: const Text(
+              "Password Provided is weak",
+              style: TextStyle(fontSize: 20.0, color: Colors.black),
+            ),
+          ));
         } else if (e.code == 'email-already-in-use') {
           print("Account Already exists");
 
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              backgroundColor: Colors.redAccent,
+              backgroundColor: Colors.orangeAccent,
               content: const Text(
                 "Account Already exists",
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontSize: 20.0, color: Colors.black),
               )));
         }
       }
     } else {
       print("Password and Confirm Password doesn't match");
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.orangeAccent,
+          content: const Text(
+            "Password and Confirm Password doesn't match",
+            style: TextStyle(fontSize: 16.0, color: Colors.black),
+          )));
     }
   }
 
