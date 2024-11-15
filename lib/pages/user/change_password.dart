@@ -1,7 +1,7 @@
-
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:crud2/pages/forget_password.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -23,7 +23,8 @@ class _ChangePasswordState extends State<ChangePassword> {
     super.dispose();
   }
 
-  ChangePassword() {
+  final currentUser = FirebaseAuth.instance.currentUser;
+  ChangePassword() async {
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const Login()));
   }
@@ -67,7 +68,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ChangePassword();
                     }
                   },
-                  child: const Text("Change Password",style: TextStyle(fontSize: 18.0),))
+                  child: const Text(
+                    "Change Password",
+                    style: TextStyle(fontSize: 18.0),
+                  ))
             ],
           ),
         ));

@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_unnecessary_containers
 
 import 'package:crud2/pages/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -21,6 +22,27 @@ class _LoginState extends State<Login> {
   void dispose() {
     emailController.dispose();
     super.dispose();
+  }
+
+  resetPassword() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.orangeAccent,
+          content: Text(
+            " password Rest Email has been send!",
+            style: TextStyle(fontSize: 20.0, color: Colors.black),
+          )));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            backgroundColor: Colors.orangeAccent,
+            content: Text(
+              "Wrong password provided by User",
+              style: TextStyle(fontSize: 20.0, color: Colors.black),
+            )));
+      }
+    }
   }
 
   @override
@@ -78,6 +100,7 @@ class _LoginState extends State<Login> {
                                       setState(() {
                                         email = emailController.text;
                                       });
+                                      resetPassword();
                                     }
                                   },
                                   child: const Text(
