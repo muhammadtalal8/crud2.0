@@ -1,7 +1,8 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, empty_statements
 
 import 'package:crud2/pages/signup.dart';
 import 'package:crud2/pages/user/user_main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -20,9 +21,31 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  userLogin() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const UserMain()));
+  userLogin() async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => UserMain()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'User-not-found') {
+        print("No User Found for that Email");
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: const Text(
+              "No User Found for that Email",
+              style: TextStyle(fontSize: 20.0),
+            )));
+      } else if (e.code == 'wrong-password') {
+        print("Wrong password provided by User");
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: const Text(
+              "No User Found for that Email",
+              style: TextStyle(fontSize: 20.0),
+            )));
+      }
+    }
   }
 
   @override
