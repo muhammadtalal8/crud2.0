@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, empty_statements
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, empty_statements, avoid_print
 
 import 'package:crud2/pages/signup.dart';
 import 'package:crud2/pages/user/user_main.dart';
@@ -26,23 +26,23 @@ class _LoginState extends State<Login> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => UserMain()));
+          context, MaterialPageRoute(builder: (context) => const UserMain()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'User-not-found') {
         print("No User Found for that Email");
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.redAccent,
-            content: const Text(
+            content: Text(
               "No User Found for that Email",
-              style: TextStyle(fontSize: 20.0),
+              style: TextStyle(fontSize: 18.0, color: Colors.black),
             )));
       } else if (e.code == 'wrong-password') {
         print("Wrong password provided by User");
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            backgroundColor: Colors.redAccent,
-            content: const Text(
-              "No User Found for that Email",
-              style: TextStyle(fontSize: 20.0),
+            backgroundColor: Colors.orangeAccent,
+            content: Text(
+              "Wrong password provided by User",
+              style: TextStyle(fontSize: 20.0, color: Colors.black),
             )));
       }
     }

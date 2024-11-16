@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -8,27 +9,39 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final uid = FirebaseAuth.instance.currentUser!.uid;
+
+  final email = FirebaseAuth.instance.currentUser!.email;
+  final creationTime = FirebaseAuth.instance.currentUser!.metadata.creationTime;
+
+  User? user = FirebaseAuth.instance.currentUser;
+  verifyEmail() async {
+    if (user != null && !user.emailVerified) {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(
         children: [
-          const Text(
-            "User ID: kll2962",
+          Text(
+            "User ID: $uid",
             style: TextStyle(fontSize: 18.0),
           ),
           Row(
             children: [
-              const Text(
-                "Email:Khan@gmail.com",
+              Text(
+                "Email: $email",
                 style: TextStyle(fontSize: 18.0),
               ),
-              TextButton(onPressed: () => {}, child: const Text("Veify Email"))
+              TextButton(
+                  onPressed: () => {verifyEmail()},
+                  child: const Text("Veify Email"))
             ],
           ),
-          const Text(
-            "Created:11/11/2024",
+          Text(
+            "Created: $creationTime",
             style: TextStyle(fontSize: 18.0),
           )
         ],
