@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, library_private_types_in_public_api, empty_catches
 
 import 'package:crud2/pages/forget_password.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +8,7 @@ class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
 
   @override
-  State<ChangePassword> createState() => _ChangePasswordState();
+  _ChangePasswordState createState() => _ChangePasswordState();
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
@@ -25,8 +25,21 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   final currentUser = FirebaseAuth.instance.currentUser;
   ChangePassword() async {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const Login()));
+    try {
+      await currentUser!.updatePassword(newPassword);
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => const Login()));
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.orangeAccent,
+          content: Text(
+            " your password have been change login again",
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
+          )));
+    } on FirebaseAuthException {}
   }
 
   @override

@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, unnecessary_const, use_build_context_synchronously, avoid_print, empty_catches
+// ignore_for_file: library_private_types_in_public_api, unnecessary_, use_build_context_synchronously, avoid_print, empty_catches
 
 import 'package:crud2/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,7 +38,7 @@ class _SignupState extends State<Signup> {
         print(userCredential);
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.redAccent,
-            content: const Text(
+            content: Text(
               "Registration successfully, Log in",
               style: TextStyle(fontSize: 20.0),
             )));
@@ -50,7 +50,7 @@ class _SignupState extends State<Signup> {
 
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.orangeAccent,
-            content: const Text(
+            content: Text(
               "Password Provided is weak",
               style: TextStyle(fontSize: 20.0, color: Colors.black),
             ),
@@ -60,7 +60,7 @@ class _SignupState extends State<Signup> {
 
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               backgroundColor: Colors.orangeAccent,
-              content: const Text(
+              content: Text(
                 "Account Already exists",
                 style: TextStyle(fontSize: 20.0, color: Colors.black),
               )));
@@ -70,7 +70,7 @@ class _SignupState extends State<Signup> {
       print("Password and Confirm Password doesn't match");
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.orangeAccent,
-          content: const Text(
+          content: Text(
             "Password and Confirm Password doesn't match",
             style: TextStyle(fontSize: 16.0, color: Colors.black),
           )));

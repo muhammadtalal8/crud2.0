@@ -152,6 +152,18 @@ class _LoginState extends State<Login> {
                                   (route) => false)
                             },
                         child: const Text('Sign Up')),
+                    TextButton(
+                        onPressed: () => {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  PageRouteBuilder(
+                                      pageBuilder: (context, a, b) =>
+                                          const UserMain(),
+                                      transitionDuration:
+                                          const Duration(seconds: 0)),
+                                  (route) => false)
+                            },
+                        child: const Text('Dashboard')),
                   ],
                 )
               ],
