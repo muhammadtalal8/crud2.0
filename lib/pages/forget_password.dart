@@ -111,9 +111,9 @@ class _LoginState extends State<Login> {
                                             context,
                                             PageRouteBuilder(
                                                 pageBuilder: (context, a, b) =>
-                                                    const Signup(),
+ Signup(),
                                                 transitionDuration:
-                                                    const Duration(seconds: 0)),
+                                                     Duration(seconds: 0)),
                                             (route) => false)
                                       },
                                   child: const Text(
